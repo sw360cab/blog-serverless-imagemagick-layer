@@ -28,7 +28,7 @@ Basically the archive uploaded is expecting a folder structure containing a `bin
 
 ## Compiling
 
-I collected all the commands used below in a script (`compile_im.sh`), so that you may call all of them in one shot. I will run this commands against an AWS Linux AMI, so based on CentOS. I have also tried to launch the same commands in an Ubuntu-based AMI, and nothing change on the final result.
+I collected all the commands used below in a script ([compile_im.sh](compile_im.sh)), so that you may call all of them in one shot. I will run this commands against an AWS Linux AMI, so based on CentOS. I have also tried to launch the same commands in an Ubuntu-based AMI, and nothing change on the final result.
 However I prefer to pick an CentOS-like AMI because apparently is a more close environment to the one where the layer will be run into.
 
 ### Prerequisites
@@ -46,11 +46,11 @@ This is for CentOS/RHEL:
 
 or in a single shot:
 
-    sudo sh -c 'yum update -y && yum -y install zlib-devel pkgconfig && yum groupinstall -y "Development Tools"'
+    sudo sh -c 'yum update -y && yum -y install zlib-devel pkgconfig zip && yum groupinstall -y "Development Tools"'
 
 This is the same for Ubuntu/Debian
 
-    sudo apt install -y build-essentials zlib1g-dev pkg-config
+    sudo sh -c 'apt update -y && apt install -y build-essential zlib1g-dev pkg-config zip'
 
 Then I will create a target directory in the home folder named `im`
 
@@ -159,7 +159,7 @@ The next step is `make`. For this special case we may add an extra flag to stati
 Here is the full steps of ImageMagick compilation:
 
     # ImageMagick
-    wget -qO- https://imagemagick.org/download/ImageMagick.tar.gz | tar xfvz -
+    wget -qO- https://imagemagick.org/download/releases/ImageMagick-7.0.10-16.tar.gz | tar xfvz -
     cd ImageMagick-7.0.10-16
     PKG_CONFIG_PATH="$HOME/im/compiled/delegates/lib/pkgconfig/" LDFLAGS="-L$HOME/im/compiled/delegates/lib" CPPFLAGS="-I$HOME/im/compiled/delegates/include -I$HOME/im/compiled/delegates/include/freetype2" ./configure \
     --prefix $HOME/im/compiled/target \

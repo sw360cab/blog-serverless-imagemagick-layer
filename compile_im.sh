@@ -26,7 +26,7 @@ CPPFLAGS="-I$BUILD_FOLDER/compiled/delegates/include" ./configure --disable-shar
 make && make install && cd ..
 
 # ImageMagick
-wget -qO- https://imagemagick.org/download/ImageMagick.tar.gz | tar xfvz -
+wget -qO- https://imagemagick.org/download/releases/ImageMagick-7.0.10-16.tar.gz | tar xfvz -
 cd ImageMagick-7.0.10-16
 PKG_CONFIG_PATH="$BUILD_FOLDER/compiled/delegates/lib/pkgconfig/" \
 LDFLAGS="-L$BUILD_FOLDER/compiled/delegates/lib" \
